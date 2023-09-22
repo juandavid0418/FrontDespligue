@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { create, get, update } from "../../../../../config/Api/api";
 import Swal from "sweetalert2";
+import DataTable from "../../../../../components/Datatable/Datatable";
+
 
 const CreateProgramaFormativo = ({ others }) => {
    const [formData, setFormData] = useState({

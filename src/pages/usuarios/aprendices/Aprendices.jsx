@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { ConsultarAprendiz, CreateAprendiz, UpdateAprendiz } from './components/aprendices.forms';
+import {  CreateAprendiz, UpdateAprendiz, ConvertirB64Modal } from './components/aprendices.forms';
 import { get } from '../../../config/Api/api';
 import DataTable from '../../../components/Datatable/Datatable';
 import Modal from '../../../components/Modals/Modal';
 import UpdateModal from '../../../components/Modals/UpdateModal';
+import { Link } from 'react-router-dom';
 
 const Aprendices = () => {
    const headers = [

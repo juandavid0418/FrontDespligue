@@ -612,9 +612,97 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
      </Fragment>
    );
  };
+ const ConvertirB64Modal = ({ others }) => {
+   const [files, setFiles] = useState([]);
+
+   const handleFileChange = (e) => {
+      const selectedFiles = e.target.files;
+      setFiles(selectedFiles);
+   };
+
+   const mostrarError = ({ message }) => {
+      Swal.fire({
+         position: 'top-end',
+         icon: 'error',
+         title: 'ERROR',
+         text: `${message}`,
+         showConfirmButton: false,
+         timer: 1500
+      });
+   };
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+         for (const file of files) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = async function () {
+               let arrayauxiliar = [];
+               const base64 = reader.result;
+               arrayauxiliar = base64.split(',');
+               const formData = {
+                  data: null
+               }
+
+               try {
+                  // Llama a la función existente para enviar el archivo
+                  // return console.log(arrayauxiliar[1])
+                  formData.data = arrayauxiliar[1]
+                  const response = await create("aprendices/ficha/cargar", formData);
+                  return console.log(response)
+
+                  if (response.ok) {
+                     console.log('Archivo procesado con éxito');
+                     await Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Registro exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                     });
+                     others.reloadData();
+                  } else {
+                     const responseData = await response;
+                     const errorMessage = responseData.error; // Supongamos que la API devuelve un campo 'error'
+                     console.error('Error al procesar el archivo:', errorMessage);
+                     mostrarError(errorMessage);
+                  }
+               } catch (error) {
+                  console.error('Error al procesar el archivo:', error.message);
+                  mostrarError('Error al procesar el archivo');
+               }
+            };
+         }
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   return (
+      <Fragment>
+         <form onSubmit={handleSubmit}>
+            <div>
+               <input type="file" multiple onChange={handleFileChange} />
+            </div>
+            <div className="col d-flex justify-content-end">
+               <button type="button" className="sm-cancel rounded p-2 mr-2" data-dismiss="modal">
+                  Cancelar
+               </button>
+               <button type="submit" className="smc-success rounded p-2">
+                  Crear
+               </button>
+            </div>
+         </form>
+      </Fragment>
+   );
+};
 
 export {
    CreateAprendiz,
    UpdateAprendiz, 
-   ConsultarAprendiz
+   ConsultarAprendiz,
+   ConvertirB64Modal
 }
