@@ -1,0 +1,132 @@
+import React, { Fragment, useEffect, useState } from 'react';
+import { ConsultarAprendiz, CreateAprendiz, UpdateAprendiz } from './components/aprendices.forms';
+import { get } from '../../../config/Api/api';
+import DataTable from '../../../components/Datatable/Datatable';
+import Modal from '../../../components/Modals/Modal';
+import UpdateModal from '../../../components/Modals/UpdateModal';
+
+const Aprendices = () => {
+   const headers = [
+      { title: "Documento", prop: "documento" },
+      { title: "Nombre Completo", prop: ["nombre", "apellidos"] },
+      { title: "Correo", prop: "email" },
+      { title: "Tipo Documento", prop: "tipoDocumentoAprendiz.nombreTipoDocumento" },
+      { title: "Ficha", prop: "fichaAprendiz.codigoFicha" },
+      {
+         title: 'Acciones',
+         prop: 'actions',
+         cell: (row) => (
+            <div className="row">
+               <div className=" col-md-5">
+                  <UpdateModal
+                     children={<UpdateAprendiz aprendiz={row} others={{ reloadData: listAprendices, listFicha, listRoles }} claves={{ tipoDoc: [...tipoDocumentos], fichas: [...ficha] }} />}
+                     configModal={{
+                        identify: `${row.documento}`,
+                        modalClasses: "modal-lg",
+                        // modalStylesContent: {},
+                        nameBtn: "Editar",
+                        btnClasses: "s-button-edit p-2 rounded",
+                        nameTitle: `Editar ${row.nombre} ${row.apellidos}`,
+                     }}
+                  />
+               </div>
+               {/* <div className=" col-md-5 " >
+            <UpdateModal
+             stylesModalContent={styles}
+             name={{ btnOpen: "Consultar", title: `${row.nombre} ${row.apellidos}` }} 
+             children={<ConsultarAprendiz aprendiz={row} />} 
+             identify={`${row.idAprendiz}`} />
+         </div> */}
+            </div>
+         ),
+      },
+   ];
+
+   const configTable = {
+      initialRows: 5,
+      rowPage: {
+         maxRows: [5, 10, 20]
+      },
+      filtrable: true,
+      pagination: true,
+      message: true,
+   }
+
+   const [aprendices, setAprendices] = useState([])
+   const [tipoDocumentos, setTipoDocumentos] = useState([])
+   const [roles, setRoles] = useState([])
+   const [ficha, setFicha] = useState([])
+   const listAprendices = async () => {
+      try {
+         const data = await get("aprendices");
+         setAprendices(data);
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   const listTipoDocumentos = async () => {
+      try {
+         const data = await get("tipo-documento");
+         setTipoDocumentos(data);
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   const listFicha = async () => {
+      try {
+         const data = await get("fichas");
+         setFicha(data);
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   const listRoles = async () => {
+      try {
+         const data = await get("roles");
+         setRoles(data);
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   useEffect(() => {
+      listAprendices();
+      listFicha();
+      listRoles();
+      listTipoDocumentos();
+   }, [listAprendices, listFicha, listRoles, listTipoDocumentos]);
+
+   return (
+      <Fragment>
+         <div className="pb-2 flex justify-between items-center">
+         <h2 className='text-4xl'>Aprendices</h2>
+
+               <Modal
+                  children={<CreateAprendiz claves={{ tipoDoc: [...tipoDocumentos], rol: [...roles], fichas: [...ficha] }} others={{ reloadData: listAprendices, listFicha, listRoles, listTipoDocumentos }} />}
+                  configModal={{
+                     identify: "Aprendices",
+                     modalClasses: "modal-lg",
+                     // modalStylesContent: {},
+                     nameBtn: "Nuevo Aprendiz",
+                     btnClasses: "s-button-create p-2 rounded",
+                     nameTitle: "Crear Aprendiz",
+                  }}
+               />
+         </div>
+         <div className='card mb-20'>
+            <div className='card-body'>
+               <DataTable
+                  headers={headers}
+                  body={aprendices}
+                  configTable={configTable}
+               />
+            </div>
+         </div>
+      </Fragment>
+   );
+};
+
+export default Aprendices;

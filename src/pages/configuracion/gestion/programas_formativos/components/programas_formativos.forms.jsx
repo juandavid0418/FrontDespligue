@@ -1,0 +1,476 @@
+import React, { Fragment, useState, useEffect } from "react";
+import { create, get, update } from "../../../../../config/Api/api";
+import Swal from "sweetalert2";
+
+const CreateProgramaFormativo = ({ others }) => {
+   const [formData, setFormData] = useState({
+      nombrePF: "",
+      codigoPF: "",
+      trimestres: "",
+      abreviaturaPF: "",
+   });
+
+   const [errors, setErrors] = useState({
+      nombrePF: "",
+      codigoPF: "",
+      trimestres: "",
+      abreviaturaPF: "",
+   });
+
+   const handleChange = async (e) => {
+      const { name, value } = e.target;
+      setFormData({
+         ...formData,
+         [name]: value,
+      });
+
+      let newErrors = { ...errors };
+
+      //  if (value.trim() === "") {
+      //    newErrors[name] = "Campo requerido";
+      //  } else {
+      //    newErrors[name] = false;
+      //  }
+
+      if (name === "codigoPF") {
+         if (!/^\d+$/.test(value)) {
+            newErrors[name] = "Ingrese un número válido ";
+         } else {
+            const programasFormativos = await get("programas-formativos");
+            if (programasFormativos.some((pf) => pf.codigoPF === value)) {
+               newErrors[name] = "El código ya está en uso";
+            }
+         }
+      }
+
+      if (name === "nombrePF") {
+         const nombres = await get("programas-formativos");
+         if (nombres.some((nom) => nom.nombrePF === value)) {
+            newErrors[name] = "El nombre ya existe ";
+         }
+      }
+
+      if (name === "abreviaturaPF") {
+         const nombres = await get("programas-formativos");
+         if (nombres.some((nom) => nom.abreviaturaPF === value)) {
+            newErrors[name] = "La abreviatura ya existe ";
+         }
+      }
+
+      if (name === "trimestres") {
+         if (!/^\d+$/.test(value)) {
+            newErrors[name] = "Ingrese solo números";
+         }
+      }
+
+      setErrors(newErrors);
+   };
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const hasErrors = Object.values(errors).some((error) => error);
+      if (hasErrors) {
+         console.log("Existen errores en el formulario.");
+         return;
+      } else {
+         try {
+            const data = await create("programas-formativos", formData);
+            await Swal.fire({
+               position: "center",
+               icon: "success",
+               title: "Registro exitoso",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+            cancelForm();
+            others.reloadData();
+            console.log(data);
+            //window.location.reload();
+         } catch (error) {
+            console.log(error);
+         }
+      }
+   };
+
+   const cancelForm = () => {
+      setFormData({
+         nombrePF: "",
+         codigoPF: "",
+         trimestres: "",
+         abreviaturaPF: ""
+      });
+   };
+
+   return (
+      <Fragment>
+         <form onSubmit={handleSubmit} className="p-2">
+            <div className="flex-row justify-between">
+               <div className="flex justify-between">
+                  <div className="form-group">
+                     <label htmlFor="codigoPF">
+                        Código Programa: <span style={{ color: "red" }}>*</span>
+                     </label>
+                     <input
+                        value={formData.codigoPF}
+                        onChange={handleChange}
+                        name="codigoPF"
+                        type="number"
+                        className={`form-control ${errors.codigoPF ? "is-invalid" : ""}`}
+                        id="codigoPF"
+                        required
+                     />
+                     {errors.codigoPF && (
+                        <span className="invalid-feedback">{errors.codigoPF}</span>
+                     )}
+                  </div>
+                  <div className="form-group ">
+                     <label htmlFor="nombrePF">
+                        Nombre Programa: <span style={{ color: "red" }}>*</span>
+                     </label>
+                     <input
+                        value={formData.nombrePF}
+                        onChange={handleChange}
+                        name="nombrePF"
+                        type="text"
+                        className={`form-control ${errors.nombrePF ? "is-invalid" : ""}`}
+                        id="nombrePF"
+                        required
+                     />
+                     {errors.nombrePF && (
+                        <span className="invalid-feedback">{errors.nombrePF}</span>
+                     )}
+                  </div>
+               </div>
+               <div className="flex justify-between">
+                  <div className="form-group">
+                     <label htmlFor="trimestres">
+                        Trimestres: <span style={{ color: "red" }}>*</span>
+                     </label>
+                     <input
+                        value={formData.trimestres}
+                        onChange={handleChange}
+                        name="trimestres"
+                        type="text"
+                        className={`form-control ${errors.trimestres ? "is-invalid" : ""
+                           }`}
+                        id="trimestres"
+                        required
+                     />
+                     {errors.trimestres && (
+                        <span className="invalid-feedback">{errors.trimestres}</span>
+                     )}
+                  </div>
+                  <div className="form-group">
+                     <label htmlFor="abreviaturaPF">
+                        Abreviatura: <span style={{ color: "red" }}>*</span>
+                     </label>
+                     <input
+                        value={formData.abreviaturaPF}
+                        onChange={handleChange}
+                        name="abreviaturaPF"
+                        type="text"
+                        className={`form-control ${errors.abreviaturaPF ? "is-invalid" : ""
+                           }`}
+                        id="abreviaturaPF"
+                        required
+                     />
+                     {errors.abreviaturaPF && (
+                        <span className="invalid-feedback">{errors.abreviaturaPF}</span>
+                     )}
+                  </div>
+               </div>
+            </div>
+
+
+            <div className="flex justify-end">
+               <button
+                  type="button" className="s-button-cancel rounded p-2 mr-2" data-dismiss="modal" onClick={cancelForm}
+               >
+                  Cancelar
+               </button>
+               <button
+                  type="submit" onClick={handleSubmit} data-dismiss="modal" className="s-button-success rounded p-2">
+                  Crear
+               </button>
+            </div>
+         </form>
+      </Fragment>
+   );
+};
+
+const UpdateProgramaFormativo = ({ programaFormativo, others }) => {
+   const [formData, setFormData] = useState({
+      nombrePF: programaFormativo.nombrePF,
+      codigoPF: programaFormativo.codigoPF,
+      trimestres: programaFormativo.trimestres,
+      abreviaturaPF: programaFormativo.abreviaturaPF
+   });
+
+   const [errors, setErrors] = useState({
+      nombrePF: "",
+      codigoPF: "",
+      trimestres: "",
+   });
+
+   const handleChange = async (e) => {
+      const { name, value } = e.target;
+      setFormData({
+         ...formData,
+         [name]: value,
+      });
+
+      let newErrors = { ...errors };
+
+      if (value.trim() === "") {
+         newErrors[name] = "Campo requerido";
+      } else {
+         newErrors[name] = false;
+      }
+
+      if (name === "codigoPF") {
+         if (!/^\d+$/.test(value)) {
+            newErrors[name] = "Ingrese un número válido ";
+         } else {
+            const programasFormativos = await get("programas-formativos");
+
+            if (programasFormativos.some((pf) => pf.codigoPF === value)) {
+               newErrors[name] = "El código ya está en uso";
+            }
+         }
+      }
+
+      if (name === "nombrePF") {
+         const nombres = await get("programas-formativos");
+         if (nombres.some((nom) => nom.nombrePF === value)) {
+            newErrors[name] = "El nombre ya existe ";
+         }
+      }
+
+      if (name === "trimestres") {
+         if (!/^\d+$/.test(value)) {
+            newErrors[name] = "Ingrese solo números";
+         }
+      }
+
+      setErrors(newErrors);
+   };
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const hasErrors = Object.values(errors).some((error) => error);
+      if (hasErrors) {
+         console.log("Existen errores en el formulario.");
+         return;
+      }
+      try {
+         await update(
+            `programas-formativos/${programaFormativo.idProgramaFormativo}`,
+            formData
+         );
+
+         await Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Actualización exitosa",
+            showConfirmButton: false,
+            timer: 1500,
+         });
+         others.reloadData();
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   const cancelForm = () => {
+      setFormData({
+         nombrePF: programaFormativo.nombrePF,
+         codigoPF: programaFormativo.codigoPF,
+         trimestres: programaFormativo.trimestres,
+         abreviaturaPF: programaFormativo.abreviaturaPF
+      })
+   };
+
+   return (
+      <Fragment>
+         <form onSubmit={handleSubmit} className="p-2">
+            <div className="flex-row">
+               <div className="flex justify-between">
+                  <div className="form-group">
+                     <label htmlFor="codigoPF">Código Programa: </label>
+                     <input
+                        value={formData.codigoPF}
+                        onChange={handleChange}
+                        name="codigoPF"
+                        type="number"
+                        className={`form-control ${errors.codigoPF ? "is-invalid" : ""}`}
+                        id="codigoPF"
+                        required
+                     />
+                     {errors.codigoPF && (
+                        <span className="invalid-feedback">{errors.codigoPF}</span>
+                     )}
+                  </div>
+                  <div className="form-group">
+                     <label htmlFor="nombrePF">Nombre Programa:</label>
+                     <input
+                        value={formData.nombrePF}
+                        onChange={handleChange}
+                        name="nombrePF"
+                        type="text"
+                        className={`form-control ${errors.nombrePF ? "is-invalid" : ""}`}
+                        id="nombrePF"
+                        required
+                     />
+                     {errors.nombrePF && (
+                        <span className="invalid-feedback">{errors.nombrePF}</span>
+                     )}
+                  </div>
+               </div>
+               <div className="flex justify-between">
+                  <div className="form-group">
+                     <label htmlFor="trimestres">Trimestres:</label>
+                     <input
+                        value={formData.trimestres}
+                        onChange={handleChange}
+                        name="trimestres"
+                        type="text"
+                        className={`form-control ${errors.trimestres ? "is-invalid" : ""
+                           }`}
+                        id="trimestres"
+                        required
+                     />
+                     {errors.trimestres && (
+                        <span className="invalid-feedback">{errors.trimestres}</span>
+                     )}
+                  </div>
+                  <div className="form-group">
+                     <label htmlFor="abreviaturaPF">
+                        Abreviatura:
+                     </label>
+                     <input
+                        value={formData.abreviaturaPF}
+                        onChange={handleChange}
+                        name="abreviaturaPF"
+                        type="text"
+                        className={`form-control ${errors.abreviaturaPF ? "is-invalid" : ""
+                           }`}
+                        id="abreviaturaPF"
+                        required
+                     />
+                     {errors.abreviaturaPF && (
+                        <span className="invalid-feedback">{errors.abreviaturaPF}</span>
+                     )}
+                  </div>
+               </div>
+            </div>
+            <div className="flex justify-end">
+               <button
+                  type="button"
+                  className="s-button-cancel rounded p-2 mr-2" data-dismiss="modal"
+                  onClick={cancelForm}
+               >
+                  Cancelar
+               </button>
+               <button type="submit" onClick={handleSubmit} data-dismiss="modal" className="s-button-success rounded p-2">Actualizar</button>
+            </div>
+         </form>
+      </Fragment>
+   );
+};
+
+
+const ConsultarPF = ({ pf }) => {
+   // eslint-disable-next-line
+   const [competencias, setCompetencias] = useState([]);
+   // eslint-disable-next-line
+   const [compe, setCompe] = useState(pf)
+   const [formData, setFormData] = useState({
+      competencia: compe.competenciaPrograma,
+   })
+
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const response = await get(`programas-formativos`);
+            setCompetencias(response);
+         } catch (error) {
+            console.error(error);
+         }
+      };
+
+      fetchData();
+   }, []);
+
+   // eslint-disable-next-line
+   const handleChange = (e) => {
+      setFormData({
+         ...formData,
+         [e.tarjet.name]: e.tarjet.value,
+      })
+   }
+   return (
+      <Fragment>
+         <div className="container">
+            <div className="row">
+               <div className="col-md-5">
+                  <div className="form-group">
+                     <label htmlFor="documento">Código Programa:</label>
+                     <p className="font-bold">{pf.codigoPF}</p>
+                  </div>
+               </div>
+               <div className="col-md-3">
+                  <div className="form-group">
+                     <label htmlFor="tipoDocumentopf">Trimestres:</label>
+                     <p className="font-bold">{pf.trimestres}</p>
+                  </div>
+               </div>
+               <div className="col-md-3">
+                  <div className="form-group">
+                     <label htmlFor="rolpf">Abreviatura:</label>
+                     <p className="font-bold">{pf.abreviaturaPF}</p>
+                  </div>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col-md-10">
+                  <div className="form-group">
+                     <label htmlFor="nombre">Nombre Programa:</label>
+                     <p className="font-bold">{pf.nombrePF}</p>
+                  </div>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col-md-6">
+                  {/* <div className="form-group">
+            <label htmlFor="email">Competencias:</label>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ID Competencia</th>
+                  <th>Código Competencia</th>
+                  <th>Nombre Competencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  compe.map(i => (
+                <tr >
+                  <td onChange={handleChange} value={formData.competencia.idCompetencia}>{formData.competencia.idCompetencia}</td> 
+                  <td onChange={handleChange} value={formData.competencia.codigoCompetencia}>{formData.competencia.codigoCompetencia}</td>
+                  <td onChange={handleChange} value={formData.competencia.nombreCompetencia}>{formData.competencia.nombreCompetencia}</td>
+                </tr>       
+                  ))
+                }
+              </tbody>
+            </table>
+          </div> */}
+               </div>
+            </div>
+         </div>
+      </Fragment>
+   );
+};
+
+export { CreateProgramaFormativo, UpdateProgramaFormativo, ConsultarPF };
