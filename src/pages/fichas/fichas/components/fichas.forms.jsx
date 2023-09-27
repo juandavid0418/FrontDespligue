@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { create, get, update } from "../../../../config/Api/api";
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
+import DataTable from "../../../../components/Datatable/Datatable";
 
 const CreateFichas = ({ claves, others }) => {
    const [formData, setFormData] = useState({
@@ -435,8 +436,93 @@ const CreateGrupoProyecto = ({ aprendices, ficha }) => {
    );
 };
 
+const ConsultarOf = ({ competencia , usuario,resultadoEntregaFicha, trimestre}) => {
+   const [competencias, setcompetencia] = useState([])
+   // const getData = async() =>{
+   //    try {
+   //       const getP = await get(`competencias-formativos`)
+   //       setcompetencia(getP)
+         
+   //    } catch (error) {
+   //       console.log(error)
+   //    }
+   // }
+
+
+   // useEffect(()=>{
+   //    getData()
+   // },[])
+  const headers  =[
+   {title : "Código", prop : "codigoCompetencia"},
+   {title : "Nombre Competencia", prop : "nombreCompetencia"},
+   // {title : "Resultado de Aprendizaje", prop : "actions", cell: (row) => (
+   //    <div>
+   //       { 
+   //          row.resultadosCompetencia.map((i)=>(
+   //             i.nombreRA
+   //          ))
+   //       }
+   //    </div>
+   // )},
+  ]
+  
+
+  const configTable = {
+      initialRows: 5,
+      rowPage: {
+         maxRows: [5, 10, 20]
+      },
+      filtrable: true,
+      pagination: true,
+      message: true,
+   }
+   
+   return (
+      <Fragment>
+         <div className="container">
+            <div className="row">
+               <div className="col-md-5">
+                  <div className="form-group">
+                     <label htmlFor="documento">Competencia:</label>
+                     <p className="font-bold">{competencia.nombreCompetencia}</p>
+                     {console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAA", competencia)}
+                  </div>
+               </div>
+               <div className="col-md-3">
+                  <div className="form-group">
+                     <label htmlFor="tipoDocumentopf">Trimestres:</label>
+                     <p className="font-bold">{trimestre}</p>
+                  </div>
+               </div>
+               <div className="col-md-3">
+                  <div className="form-group">
+                     <label htmlFor="rolpf">Instructor:</label>
+                     <p className="font-bold">{usuario.nombre} {usuario.apellidos}</p>
+                  </div>
+               </div>
+               
+            </div>
+            <div className="row">
+               <div className="col-md-10">
+                  <div className="form-group">
+                     <label htmlFor="nombre">Resultado de Aprendizaje:</label>
+                     <p className="font-bold">{resultadoEntregaFicha.nombreRA}</p>
+                  </div>
+               </div>
+            </div>
+            {/* <DataTable
+
+            headers={headers}
+            body = {competencia }
+            configTable={configTable}
+
+
+            /> */}
+         </div>
+      </Fragment>
+   );
+};
 
 
 
-
-export { CreateFichas, FichaInstructor, CreateGrupoProyecto };
+export { CreateFichas, FichaInstructor, CreateGrupoProyecto, ConsultarOf };

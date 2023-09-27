@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {  CreateAprendiz, UpdateAprendiz, ConvertirB64Modal } from './components/aprendices.forms';
+import { ConsultarAprendiz, ConvertirB64Modal, CreateAprendiz, UpdateAprendiz } from './components/aprendices.forms';
 import { get } from '../../../config/Api/api';
 import DataTable from '../../../components/Datatable/Datatable';
 import Modal from '../../../components/Modals/Modal';
 import UpdateModal from '../../../components/Modals/UpdateModal';
 import { Link } from 'react-router-dom';
-
 
 const Aprendices = () => {
    const headers = [
@@ -32,7 +31,6 @@ const Aprendices = () => {
                      }}
                   />
                </div>
-
                <div className=" col-md-5 " >
                   <Link to={`/consultarAprendiz/${row.idAprendiz}`}>
                      <button className='s-button-consult rounded p-2'>Consultar</button>
@@ -104,29 +102,35 @@ const Aprendices = () => {
       <Fragment>
          <div className="pb-2 flex justify-between items-center">
             <h2 className='text-4xl'>Aprendices</h2>
-            <Modal
-               children={<ConvertirB64Modal others={{ reloadData: listAprendices, listFicha, listTipoDocumentos }} />}
+            <div className="flex justify-between items-center">
+               <div className="mr-2">
+                  <Modal
+                     children={<ConvertirB64Modal others={{ reloadData: listAprendices, listFicha, listTipoDocumentos }} />}
 
-               configModal={{
-                  identify: `AprendizCarga`,
-                  modalClasses: "modal-dialog-centered modal-lg",
-                  // modalStylesContent: {},
-                  nameBtn: "Cargar Aprendices",
-                  btnClasses: "s-button-create p-2 rounded",
-                  nameTitle: "Crear Aprendiz",
-               }}
-            />
-            <Modal
-               children={<CreateAprendiz claves={{ tipoDoc: [...tipoDocumentos], rol: [...roles], fichas: [...ficha] }} others={{ reloadData: listAprendices, listFicha, listRoles, listTipoDocumentos }} />}
-               configModal={{
-                  identify: `Aprendices`,
-                  modalClasses: "modal-lg",
-                  // modalStylesContent: {},
-                  nameBtn: "Nuevo Aprendiz",
-                  btnClasses: "s-button-success p-2 rounded",
-                  nameTitle: "Crear Aprendiz",
-               }}
-            />
+                     configModal={{
+                        identify: `Aprendices`,
+                        modalClasses: "modal-dialog-centered modal-lg",
+                        // modalStylesContent: {},
+                        nameBtn: "Cargar Aprendices",
+                        btnClasses: "s-button-create p-2 rounded",
+                        nameTitle: "Crear Aprendiz",
+                     }}
+                  />
+               </div>
+               <div>
+                  <Modal
+                     children={<CreateAprendiz claves={{ tipoDoc: [...tipoDocumentos], rol: [...roles], fichas: [...ficha] }} others={{ reloadData: listAprendices, listFicha, listRoles, listTipoDocumentos }} />}
+                     configModal={{
+                        identify: `AprendicesC`,
+                        modalClasses: "modal-lg",
+                        // modalStylesContent: {},
+                        nameBtn: "Nuevo Aprendiz",
+                        btnClasses: "s-button-success p-2 rounded",
+                        nameTitle: "Crear Aprendiz",
+                     }}
+                  />
+               </div>
+            </div>
          </div>
          <div className='card mb-20'>
             <div className='card-body'>

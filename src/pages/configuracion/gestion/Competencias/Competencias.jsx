@@ -33,7 +33,6 @@ const Competencias = () => {
                      children={<ConsultarCompetencia competencia={row} compeR={row.resultadosCompetencia} />}
                      configModal={{
                         identify: `${row.nombreCompetencia}`,
-
                         modalClasses: "",
                         // modalStylesContent: {},
                         nameBtn: "Consultar",
@@ -80,7 +79,7 @@ const Competencias = () => {
    useEffect(() => {
       listCompetencias();
       listProgramaFormativo();
-   }, [listCompetencias, listProgramaFormativo]);
+   }, []);//listCompetencias, listProgramaFormativo
 
 
    return (

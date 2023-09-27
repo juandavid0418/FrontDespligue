@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+
+import React, { Fragment, useEffect, useState } from "react";
 import { create, get, update } from "../../../../../config/Api/api";
 import Swal from "sweetalert2";
-import DataTable from "../../../../../components/Datatable/Datatable"
-
+import DataTable from "../../../../../components/Datatable/Datatable";
 
 const CreateCompetencia = ({ claves, others }) => {
    const [formData, setFormData] = useState({

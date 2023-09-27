@@ -85,11 +85,6 @@ const  QuejaFinalizado = ({ quejasF }) => {
             title: "Acciones", prop: "actions", cell: (row) => {
                 return (
                     <div className="row">
-                    <div className=" col-md-5">
-                       <button type="button" onClick={() => handleSubmit(row.idQueja)} className="btn btn-success bg-success" data-target="#revertirQuejas" name='revertirQuejas'>
-                          Revertir
-                       </button>
-                    </div>
                     <div className=" col-md-2">
                        <UpdateModal
                         configModal={{

@@ -28,7 +28,7 @@ const ComiteSF = ({ comites, reloadData }) => {
                            }}
                         />
                      </div>
-                     <div>
+                     {/* <div>
                         <UpdateModal
                            children={<ActaResolucionStepper reloadData={reloadData} comiteInfo={row} />}
                            configModal={{
@@ -40,7 +40,7 @@ const ComiteSF = ({ comites, reloadData }) => {
                               nameTitle: ``,
                            }}
                         />
-                     </div>
+                     </div> */}
                   </div>
                )
             } else {

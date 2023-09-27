@@ -653,6 +653,8 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
                   // return console.log(arrayauxiliar[1])
                   formData.data = arrayauxiliar[1]
                   const response = await create("aprendices/ficha/cargar", formData);
+                  // alert('Archivo Procesado con éxito')
+                  window.location.href = '/aprendices'
                   return console.log(response)
 
                   if (response.ok) {
@@ -701,11 +703,9 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
    );
 };
 
-
-
 export {
    CreateAprendiz,
-   UpdateAprendiz,
+   UpdateAprendiz, 
    ConsultarAprendiz,
    ConvertirB64Modal
 }

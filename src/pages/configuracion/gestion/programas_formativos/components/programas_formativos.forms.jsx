@@ -2,8 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import { create, get, update } from "../../../../../config/Api/api";
 import Swal from "sweetalert2";
 import DataTable from "../../../../../components/Datatable/Datatable";
-
-
 const CreateProgramaFormativo = ({ others }) => {
    const [formData, setFormData] = useState({
       nombrePF: "",
@@ -382,7 +380,6 @@ const UpdateProgramaFormativo = ({ programaFormativo, others }) => {
    );
 };
 
-
 const ConsultarPF = ({ programa ,pf }) => {
    const [programas, setPrograma] = useState([])
    const getData = async() =>{
@@ -423,7 +420,6 @@ const ConsultarPF = ({ programa ,pf }) => {
       pagination: true,
       message: true,
    }
-
    return (
       <Fragment>
          <div className="container">
@@ -455,7 +451,6 @@ const ConsultarPF = ({ programa ,pf }) => {
                   </div>
                </div>
             </div>
-
             <DataTable
 
             headers={headers}

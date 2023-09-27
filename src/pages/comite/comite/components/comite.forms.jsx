@@ -599,7 +599,7 @@ const UploadActa = ({ comiteInfo, reload }) => {
          await reload()
       }
       // onNext()
-      // return navigate("/comite")
+      return navigate("/comite")
    }
 
    return (
@@ -645,6 +645,7 @@ const UploadResolucion = ({ comiteInfo, reload }) => {
                estadoQueja: 5
             }
             await update(`quejas/${i.idQueja}`, queja)
+            console.log("Hola Quejas:", i)
 
             if (i.decisionQueja.nombreDecision.includes("Plan de Mejoramiento")) {
                const newPlan = {
@@ -654,6 +655,7 @@ const UploadResolucion = ({ comiteInfo, reload }) => {
                   trimestre: i.trimestre,
                }
                await create("plan-mejoramiento", newPlan)
+               console.log("Hola Plan")
             }
             if (i.decisionQueja.nombreDecision.includes("Cancelación")) {
                const aprendizCancel = {

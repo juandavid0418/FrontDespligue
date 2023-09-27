@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { CreateProgramaFormativo, UpdateProgramaFormativo, ConsultarPF } from './components/programas_formativos.forms';
+import DataTable from '../../../../components/Datatable/Datatable';
 import Modal from '../../../../components/Modals/Modal';
 import { get } from '../../../../config/Api/api';
 import UpdateModal from '../../../../components/Modals/UpdateModal';
-import DataTable from '../../../../components/Datatable/Datatable';
-
 
 const ProgramasFormativos = () => {
    const headers = [
@@ -74,7 +73,7 @@ const ProgramasFormativos = () => {
 
    useEffect(() => {
       listData();
-   }, [])
+   }, [])// listData
 
    return (
       <Fragment>

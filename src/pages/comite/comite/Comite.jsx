@@ -44,7 +44,7 @@ const Comite = () => {
          title: "Acciones", prop: "actions", cell: (row) => {
             return (
                <div className="flex justify-start items-center">
-                  <div className="mr-2">
+                  {/* <div className="mr-2">
                      <UpdateModal
                         children={"hola"}
                         configModal={{
@@ -56,7 +56,8 @@ const Comite = () => {
                            nameTitle: `AA`,
                         }}
                      />
-                  </div>
+                  </div> */}
+                  Contenido no Disponible
                </div>
             )
          }

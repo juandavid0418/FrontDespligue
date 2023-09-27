@@ -80,7 +80,8 @@ const ResultadosAprendizaje = () => {
    useEffect(() => {
       listCompetencias();
       listResultadoAprendizaje();
-   }, [listCompetencias, listResultadoAprendizaje]);
+   }, []);//listCompetencias, listResultadoAprendizaje
+
 
    return (
       <Fragment>

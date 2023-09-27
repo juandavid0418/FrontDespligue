@@ -32,8 +32,6 @@ const PlanMejoramiento = () => {
 
             console.log("Planes SF", plan)
             console.log("Planes F", planFinalizados)
-
-
          } catch (error) {
             console.log(error)
          }
@@ -44,7 +42,6 @@ const PlanMejoramiento = () => {
    const styles = {
       modalWidth: "50px"
    }
-
 
    const headers = [
       // { title: "ID", prop: "idPlanMejoramiento" },
@@ -65,7 +62,6 @@ const PlanMejoramiento = () => {
                            btnClasses: "s-button-others p-2 rounded",
                            nameTitle: `Finalizar ${row.aprendizPlanMejoramiento.nombre}`,
                         }}
-
                         children={
                            <FinalizarPlan
                               user={user.idUsuario}
@@ -90,7 +86,6 @@ const PlanMejoramiento = () => {
                            btnClasses: "s-button-others p-2 rounded",
                            nameTitle: `${row.aprendizPlanMejoramiento.nombre} - ${row.aprendizPlanMejoramiento.apellidos}`,
                         }}
-
                         children={
                            <ConsultarPlan
                               usuario={user}

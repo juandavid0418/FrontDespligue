@@ -121,7 +121,7 @@ const Fichas = () => {
 
    useEffect(() => {
       obtenerFichas()
-   }, [user, obtenerFichas])
+   }, [user, ])// obtenerFichas
 
    const rowShow = useMemo(() => {
       if (user.rolUsuario && user.rolUsuario.nombreRol.includes("Instructor")) {

@@ -43,5 +43,4 @@ export {
    PlanMejoramiento,
    Gestion,
    ConsultarAprendiz
-
 }

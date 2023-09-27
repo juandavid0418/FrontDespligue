@@ -40,6 +40,12 @@ const CreateEntregaFicha = ({ fichaInfo, competencias, resultados, traerResultad
          const data = await create("entrega-ficha", formData)
          console.log(data)
 
+         localStorage.setItem("entregaID", data.idEntregaFicha)
+
+         localStorage.setItem('idEntrega', JSON.stringify({
+            value: data.idEntregaFicha,
+            content: data
+         }));
          localStorage.setItem('trimestre', JSON.stringify({
             value: formData.trimestre,
             content: document.getElementById('trimestre').options[document.getElementById('trimestre').selectedIndex].innerHTML
@@ -149,6 +155,7 @@ const CreateObservacionesAprendiz = ({ aprendices, decision, motivos, pasarForm,
       decisionObservacion: '',
       motivoQueja: '',
     })));
+   //  const [idEntrega, setIdEntrega] = useState()
 
    useEffect(() => {
       if (observaciones.length !== 0) {
@@ -162,11 +169,13 @@ const CreateObservacionesAprendiz = ({ aprendices, decision, motivos, pasarForm,
                   decisionObservacion: i.decisionObservacion,
                   competenciaObservacion: i.competencia,
                   resultadoAObservacion: i.resultadoAprendizaje,
+                  entregaObservacionAprendiz: i.entregaObservacionAprendiz
                }
                console.log(i.decisionObservacion);
                const dataObservacion = await create("observaciones-aprendiz", observacion)
 
-               console.log(i.motivoQueja)
+               console.log(dataObservacion)
+               console.log(i.motivoQuejaContent)
                if (dataObservacion && i.motivoQuejaContent !== "No Aplica") {
                   const queja = {
                      trimestre: i.trimestre,
@@ -181,12 +190,14 @@ const CreateObservacionesAprendiz = ({ aprendices, decision, motivos, pasarForm,
                   await create("quejas", queja)
                }
             })
+
+            localStorage.removeItem("fichaV")
             localStorage.removeItem("trimestre")
             localStorage.removeItem("competencia")
             localStorage.removeItem("resultadoAprendizaje")
 
-            alert('Has completado la entrega de ficha')
-            window.location.href = `/fichas/${fichaInfo.codigoFicha}`
+            // alert('Has completado la entrega de ficha')
+            // window.location.href = `/fichas/${fichaInfo.codigoFicha}`
          } catch (error) {
             console.error(error)
          }
@@ -234,7 +245,7 @@ const CreateObservacionesAprendiz = ({ aprendices, decision, motivos, pasarForm,
      console.log(index, target)
    }
 
-
+   const idEntrega = localStorage.getItem("entregaID")
    const t = JSON.parse(localStorage.getItem("trimestre"));
    const c = JSON.parse(localStorage.getItem("competencia"));
    const r = JSON.parse(localStorage.getItem("resultadoAprendizaje"));
@@ -271,6 +282,7 @@ const CreateObservacionesAprendiz = ({ aprendices, decision, motivos, pasarForm,
                   {aprendices.map((aprendiz, index) => (
                      <form key={index} className="form row d-flex" id="observacionesAprendizForm">
                         <input type="hidden" name="trimestre" id="trimestre" value={t.value} />
+                        <input type="hidden" name="entregaObservacionAprendiz" id="entregaObservacionAprendiz" value={idEntrega} />
                         <input type="hidden" name="aprendizObservacion" id="aprendizObservacion" value={aprendiz.idAprendiz} />
                         <input type="hidden" name="usuarioObservacion" id="usuarioObservacion" value={user.idUsuario} />
                         <input type="hidden" name="competenciaObservacion" id="competenciaObservacion" value={c.value} />

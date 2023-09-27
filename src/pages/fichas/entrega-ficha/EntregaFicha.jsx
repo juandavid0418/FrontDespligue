@@ -20,7 +20,8 @@ const EntregaFicha = () => {
          try {
             const fichaI = await get(`fichas/${ficha}`)
             setFichaInfo(fichaI)
-
+            console.log(fichaI)
+            localStorage.setItem("fichaV", fichaI.idFicha)
             const aprendicesFicha = await get(`aprendices/ficha/${ficha}`)
             setAprendices(aprendicesFicha)
 

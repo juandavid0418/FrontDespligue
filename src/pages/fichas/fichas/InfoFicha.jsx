@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { CreateGrupoProyecto, ModalEditarFicha } from "./components/fichas.forms";
+import { CreateGrupoProyecto, ModalEditarFicha , ConsultarOf} from "./components/fichas.forms";
 import { get } from "../../../config/Api/api";
 import DataTable from "../../../components/Datatable/Datatable";
 import Modal from "../../../components/Modals/Modal";
 import jwt_decode from "jwt-decode";
+import UpdateModal from "../../../components/Modals/UpdateModal";
 
 
 const InfoFicha = () => {
@@ -38,6 +39,29 @@ const InfoFicha = () => {
       { title: "Realizada por", prop: ["usuarioEntregaFicha.nombre", "usuarioEntregaFicha.apellidos"] },
       { title: "Competencia", prop: "competenciaEntregaFicha.nombreCompetencia" },
       { title: "Resultado de Aprendizaje", prop: "resultadoEntregaFicha.nombreRA" },
+      {
+         title: 'Acciones',
+         prop: 'actions',
+         cell: (row) => (
+            <div className='row'>
+              {console.log("MOSTRAR MONDAAA", row)}
+
+               <div className=" col-md-5">
+                  <UpdateModal
+                     children={<ConsultarOf pf={row} competencia={row.competenciaEntregaFicha} usuario={row.usuarioEntregaFicha} trimestre={row.trimestre} resultadoEntregaFicha={row.resultadoEntregaFicha}/>}
+                     configModal={{
+                        identify: `${row.competenciaEntregaFicha.nombreCompetencia}`,
+                        modalClasses: "modal-dialog-centered",
+                        // modalStylesContent: {},
+                        nameBtn: "Consultar",
+                        btnClasses: "s-button-consult p-2 rounded",
+                        nameTitle: `Programa ${row.competenciaEntregaFicha.nombreCompetencia}`,
+                     }}
+                  />
+               </div>
+            </div>
+         ),
+      },
    ]
 
    const configTable = {

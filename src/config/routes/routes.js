@@ -33,7 +33,7 @@ const ProtectedRoutes = () => {
       { path: "/comite/:comite", element: <DashboardLayout children={<ComiteCitado />} /> },
       { path: "/nuevoComite", element: <DashboardLayout children={<CrearComite />} /> },
       { path: "/planMejoramiento", element: <DashboardLayout children={<PlanMejoramiento />} /> },
-      // { path: "/URL", element: <DashboardLayout children={<VISTA_A_MOSTRAR />} /> },   
+      // { path: "/URL", element: <DashboardLayout children={<VISTA_A_MOSTRAR />} /> },   7
       { path: "/gestion", element: <DashboardLayout children={<Gestion />} /> },
       { path: "/consultarAprendiz/:idAprendiz", element: <DashboardLayout children={<ConsultarAprendiz />} /> },
    ]
