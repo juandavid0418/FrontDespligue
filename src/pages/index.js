@@ -20,7 +20,6 @@ import CrearComite from "./comite/comite/ComiteCreado/CrearComite";
 import PlanMejoramiento from './comite/planMejoramiento/PlanMejoramiento';
 import Gestion from './configuracion/gestion/gestion'
 import ConsultarAprendiz from "./usuarios/aprendices/components/aprendices.consultar";
-
 export {
    Login,
    InitialPage,
@@ -44,4 +43,5 @@ export {
    PlanMejoramiento,
    Gestion,
    ConsultarAprendiz
+
 }

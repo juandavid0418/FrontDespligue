@@ -3,6 +3,7 @@ import { create, get, update } from "../../../../../config/Api/api";
 import Swal from "sweetalert2";
 import DataTable from "../../../../../components/Datatable/Datatable"
 
+
 const CreateCompetencia = ({ claves, others }) => {
    const [formData, setFormData] = useState({
       nombreCompetencia: "",
@@ -284,7 +285,6 @@ const UpdateCompetencia = ({ competencia, claves, others }) => {
 
 
 }
-
 
 const ConsultarCompetencia = ({ competencia, compeR }) => {
    const [pcompesR, setCompeR] = useState([])

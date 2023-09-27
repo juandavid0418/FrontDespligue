@@ -382,6 +382,7 @@ const UpdateProgramaFormativo = ({ programaFormativo, others }) => {
    );
 };
 
+
 const ConsultarPF = ({ programa ,pf }) => {
    const [programas, setPrograma] = useState([])
    const getData = async() =>{
@@ -422,7 +423,7 @@ const ConsultarPF = ({ programa ,pf }) => {
       pagination: true,
       message: true,
    }
-   
+
    return (
       <Fragment>
          <div className="container">
@@ -454,6 +455,7 @@ const ConsultarPF = ({ programa ,pf }) => {
                   </div>
                </div>
             </div>
+
             <DataTable
 
             headers={headers}

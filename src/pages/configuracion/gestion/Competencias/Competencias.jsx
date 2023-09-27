@@ -33,6 +33,7 @@ const Competencias = () => {
                      children={<ConsultarCompetencia competencia={row} compeR={row.resultadosCompetencia} />}
                      configModal={{
                         identify: `${row.nombreCompetencia}`,
+
                         modalClasses: "",
                         // modalStylesContent: {},
                         nameBtn: "Consultar",

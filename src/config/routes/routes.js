@@ -1,6 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../layout/DashboardLayout";
-import { Administrador, Aprendices, Comite, ComiteCitado, Competencias, CrearComite, EntregaFicha, Fichas, InfoFicha, InitialPage, Login, NotFound, PlanMejoramiento, ProgramaCoordinacion, ProgramasFormativos, QuejasComite, ResultadosAprendizaje, Roles, Usuarios, Gestion, ProyectosFormativos, GrupoProyecto, GrupoFicha, Perfil } from "../../pages";
+import { Administrador, Aprendices, Comite, ComiteCitado, Competencias, CrearComite, EntregaFicha, Fichas, InfoFicha, InitialPage, Login, NotFound, PlanMejoramiento, ProgramaCoordinacion, ProgramasFormativos, QuejasComite, ResultadosAprendizaje, Roles, Usuarios, Gestion, ProyectosFormativos, GrupoProyecto, GrupoFicha, Perfil, ConsultarAprendiz } from "../../pages";
 import jwt_decode from "jwt-decode";
 import CreateRole from "../../pages/configuracion/roles/CreateRole";
 import UpdateRole from "../../pages/configuracion/roles/UpdateRole";
@@ -35,7 +35,7 @@ const ProtectedRoutes = () => {
       { path: "/planMejoramiento", element: <DashboardLayout children={<PlanMejoramiento />} /> },
       // { path: "/URL", element: <DashboardLayout children={<VISTA_A_MOSTRAR />} /> },   
       { path: "/gestion", element: <DashboardLayout children={<Gestion />} /> },
-      { path: "/consultarAprendiz/:idAprendiz", element: <DashboardLayout children={<consultarAprendiz />} /> },
+      { path: "/consultarAprendiz/:idAprendiz", element: <DashboardLayout children={<ConsultarAprendiz />} /> },
    ]
    const token = localStorage.getItem("tokenJWT");
    if (token === null) {

@@ -612,6 +612,7 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
      </Fragment>
    );
  };
+
  const ConvertirB64Modal = ({ others }) => {
    const [files, setFiles] = useState([]);
 
@@ -700,9 +701,11 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
    );
 };
 
+
+
 export {
    CreateAprendiz,
-   UpdateAprendiz, 
+   UpdateAprendiz,
    ConsultarAprendiz,
    ConvertirB64Modal
 }

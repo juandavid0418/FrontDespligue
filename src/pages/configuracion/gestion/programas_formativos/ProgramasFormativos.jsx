@@ -5,6 +5,7 @@ import { get } from '../../../../config/Api/api';
 import UpdateModal from '../../../../components/Modals/UpdateModal';
 import DataTable from '../../../../components/Datatable/Datatable';
 
+
 const ProgramasFormativos = () => {
    const headers = [
       { title: "Código", prop: "codigoPF" },
@@ -73,7 +74,7 @@ const ProgramasFormativos = () => {
 
    useEffect(() => {
       listData();
-   }, [listData])
+   }, [])
 
    return (
       <Fragment>

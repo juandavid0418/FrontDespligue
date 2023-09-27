@@ -6,6 +6,7 @@ import Modal from '../../../components/Modals/Modal';
 import UpdateModal from '../../../components/Modals/UpdateModal';
 import { Link } from 'react-router-dom';
 
+
 const Aprendices = () => {
    const headers = [
       { title: "Documento", prop: "documento" },
@@ -31,6 +32,7 @@ const Aprendices = () => {
                      }}
                   />
                </div>
+
                <div className=" col-md-5 " >
                   <Link to={`/consultarAprendiz/${row.idAprendiz}`}>
                      <button className='s-button-consult rounded p-2'>Consultar</button>
@@ -96,7 +98,7 @@ const Aprendices = () => {
       listFicha();
       listRoles();
       listTipoDocumentos();
-   }, [listAprendices, listFicha, listRoles, listTipoDocumentos]);
+   }, []);
 
    return (
       <Fragment>
@@ -106,7 +108,7 @@ const Aprendices = () => {
                children={<ConvertirB64Modal others={{ reloadData: listAprendices, listFicha, listTipoDocumentos }} />}
 
                configModal={{
-                  identify: "Aprendices",
+                  identify: `AprendizCarga`,
                   modalClasses: "modal-dialog-centered modal-lg",
                   // modalStylesContent: {},
                   nameBtn: "Cargar Aprendices",
@@ -117,7 +119,7 @@ const Aprendices = () => {
             <Modal
                children={<CreateAprendiz claves={{ tipoDoc: [...tipoDocumentos], rol: [...roles], fichas: [...ficha] }} others={{ reloadData: listAprendices, listFicha, listRoles, listTipoDocumentos }} />}
                configModal={{
-                  identify: "Aprendices",
+                  identify: `Aprendices`,
                   modalClasses: "modal-lg",
                   // modalStylesContent: {},
                   nameBtn: "Nuevo Aprendiz",

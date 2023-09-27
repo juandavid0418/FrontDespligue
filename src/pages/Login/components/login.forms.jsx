@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { loginValidate, create} from "../../../config/Api/api";
 import { ErrorValidate } from "../../../components/Alerts/error.alert";
+import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 
 const LoginForm = () => {
@@ -92,10 +93,14 @@ const LoginForm = () => {
               setValidations(errorChanges);
               return setErrorBD(auth);
             } else {
-              localStorage.setItem("tokenJWT", auth.token);
-              window.location.href = "/";
-            }
-          })
+                     localStorage.setItem("tokenJWT", auth.token);
+
+                     const decodeToken = jwt_decode(auth.token);
+                     const tokenExpired = decodeToken.exp;
+
+                     localStorage.setItem("tokenExpired", JSON.stringify(tokenExpired))
+                     window.location.href = "/";
+                  }})
           .catch((auth) => console.log(auth));
       } catch (error) {
         console.log(error);
@@ -382,3 +387,4 @@ const LoginForm = () => {
 };
 
 export { LoginForm};
+
