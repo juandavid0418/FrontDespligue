@@ -647,7 +647,7 @@ const UploadResolucion = ({ comiteInfo, reload }) => {
             await update(`quejas/${i.idQueja}`, queja)
             console.log("Hola Quejas:", i)
 
-            if (i.decisionQueja.nombreDecision.includes("Plan de Mejoramiento")) {
+            if (i.decisionQueja.idDecision===2) {
                const newPlan = {
                   quejaPlanMejoramiento: i.idQueja,
                   usuarioPlanMejoramiento: i.usuarioQueja.idUsuario,
