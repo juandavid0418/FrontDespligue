@@ -32,7 +32,8 @@ const Aprendices = () => {
                   />
                </div>
                <div className=" col-md-5 " >
-                  <Link to={`/consultarAprendiz/${row.idAprendiz}`}>
+                  <Link to={`/consultarAprendiz/${row.idAprendiz}`}
+                  state={{ aprendizData: row }}>
                      <button className='s-button-consult rounded p-2'>Consultar</button>
                   </Link>
                </div>

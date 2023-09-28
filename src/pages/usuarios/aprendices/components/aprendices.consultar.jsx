@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import React, { useState, useEffect, Fragment } from 'react'
 
 
@@ -14,6 +14,17 @@ const ConsultarAprendiz = () =>{
   //   </div>
   //   </Fragment>
   // );
+  // Define un estado para almacenar los datos del aprendiz
+  // const [aprendiz, setAprendiz] = useState({
+  //   nombre: '',
+  //   apellidos: '',
+  //   documento: '',
+  //   email: '',
+  //   telefono: '',
+
+  // });
+  const location = useLocation();
+  const { aprendizData } = location.state || {};
 
   return (
     <Fragment>
@@ -25,20 +36,20 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Nombre del Aprendiz</h5>
-                <p class="card-text">{idAprendiz.nombre} {idAprendiz.apellidos}</p>
+                <p class="card-text">{aprendizData.nombre} {aprendizData.apellidos}</p>
               </div>
             </li>
             <li class="list-group-item">
               <div class="card-body row">
-                <h5 class="card-title col-3 text-muted">Documento del Usuario</h5>
-                <p class="card-text">{idAprendiz.documento}</p>
+                <h5 class="card-title col-3 text-muted">Documento del Aprendiz</h5>
+                <p class="card-text">{aprendizData.documento}</p>
               </div>
             </li>
 
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Correo electrónico</h5>
-                <p class="card-text">{idAprendiz.email}</p>
+                <p class="card-text">{aprendizData.email}</p>
               </div>
             </li>
 
@@ -46,7 +57,7 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Número celular</h5>
-                <p class="card-text">{idAprendiz.telefono}</p>
+                <p class="card-text">{aprendizData.telefono}</p>
               </div>
             </li>
           </ul>
