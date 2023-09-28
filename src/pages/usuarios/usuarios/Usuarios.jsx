@@ -89,7 +89,7 @@ const Usuarios = () => {
       listUsuarios();
       listTipoDocumentos();
       listRoles();
-   }, [listUsuarios, listTipoDocumentos, listRoles]);
+   }, []); //listUsuarios, listTipoDocumentos, listRoles
 
 
 
