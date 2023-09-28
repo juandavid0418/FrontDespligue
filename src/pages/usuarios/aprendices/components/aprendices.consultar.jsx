@@ -166,7 +166,10 @@ const ConsultarAprendiz = () =>{
                 <DataTable
 
               headers={headers1}
-              body = {observaciones }
+              body = {observaciones.map((row) => ({
+                ...row,
+                ObservacionAprendiz: row.ObservacionAprendiz ?? 'No disponible',
+              }))}
               configTable={configTable}
 
 
@@ -182,7 +185,10 @@ const ConsultarAprendiz = () =>{
                 <DataTable
 
               headers={headers2}
-              body = {quejas}
+              body = {quejas.map((row) => ({
+                ...row,
+                QuejaAprendiz: row.QuejaAprendiz ?? 'No disponible',
+              }))}
               configTable={configTable}
 
 
@@ -197,7 +203,10 @@ const ConsultarAprendiz = () =>{
                 <DataTable
 
               headers={headers3}
-              body = {planM}
+              body = {planM.map((row) => ({
+                ...row,
+                PalnMAprendiz: row.PalnMAprendiz ?? 'No disponible',
+              }))}
               configTable={configTable}
 
 
