@@ -653,11 +653,7 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
                   // return console.log(arrayauxiliar[1])
                   formData.data = arrayauxiliar[1]
                   const response = await create("aprendices/ficha/cargar", formData);
-                  // alert('Archivo Procesado con éxito')
-                  window.location.href = '/aprendices'
-                  return console.log(response)
-
-                  if (response.ok) {
+                  if (response) {
                      console.log('Archivo procesado con éxito');
                      await Swal.fire({
                         position: 'center',
@@ -666,13 +662,17 @@ const UpdateAprendiz = ({ aprendiz, claves, others }) => {
                         showConfirmButton: false,
                         timer: 1500
                      });
-                     others.reloadData();
                   } else {
                      const responseData = await response;
                      const errorMessage = responseData.error; // Supongamos que la API devuelve un campo 'error'
                      console.error('Error al procesar el archivo:', errorMessage);
                      mostrarError(errorMessage);
                   }
+                  // alert('Archivo Procesado con éxito')
+                  window.location.href = '/aprendices'
+                  return console.log(response)
+
+                  
                } catch (error) {
                   console.error('Error al procesar el archivo:', error.message);
                   mostrarError('Error al procesar el archivo');
