@@ -9,6 +9,7 @@ const Competencias = () => {
    const headers = [
       { title: "Código", prop: "codigoCompetencia" },
       { title: "Nombre Competencia", prop: "nombreCompetencia" },
+      { title: "Nombre de NCSL", prop: "nombreNCSL"},
       { title: "Programa Formativo", prop: "programasCompetencia.nombrePF" },
       {
          title: 'Acciones',
@@ -32,7 +33,7 @@ const Competencias = () => {
                   <UpdateModal
                      children={<ConsultarCompetencia competencia={row} compeR={row.resultadosCompetencia} />}
                      configModal={{
-                        identify: `${row.nombreCompetencia}`,
+                        identify: `${row.idCompetencia}`,
                         modalClasses: "",
                         // modalStylesContent: {},
                         nameBtn: "Consultar",

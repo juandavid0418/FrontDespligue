@@ -26,11 +26,11 @@ const CreateProgramaFormativo = ({ others }) => {
 
       let newErrors = { ...errors };
 
-      //  if (value.trim() === "") {
-      //    newErrors[name] = "Campo requerido";
-      //  } else {
-      //    newErrors[name] = false;
-      //  }
+       if (value.trim() === "") {
+         newErrors[name] = "Campo requerido";
+       } else {
+         newErrors[name] = false;
+       }
 
       if (name === "codigoPF") {
          if (!/^\d+$/.test(value)) {
@@ -43,19 +43,19 @@ const CreateProgramaFormativo = ({ others }) => {
          }
       }
 
-      if (name === "nombrePF") {
-         const nombres = await get("programas-formativos");
-         if (nombres.some((nom) => nom.nombrePF === value)) {
-            newErrors[name] = "El nombre ya existe ";
-         }
-      }
+      // if (name === "nombrePF") {
+      //    const nombres = await get("programas-formativos");
+      //    if (nombres.some((nom) => nom.nombrePF === value)) {
+      //       newErrors[name] = "El nombre ya existe ";
+      //    }
+      // }
 
-      if (name === "abreviaturaPF") {
-         const nombres = await get("programas-formativos");
-         if (nombres.some((nom) => nom.abreviaturaPF === value)) {
-            newErrors[name] = "La abreviatura ya existe ";
-         }
-      }
+      // if (name === "abreviaturaPF") {
+      //    const nombres = await get("programas-formativos");
+      //    if (nombres.some((nom) => nom.abreviaturaPF === value)) {
+      //       newErrors[name] = "La abreviatura ya existe ";
+      //    }
+      // }
 
       if (name === "trimestres") {
          if (!/^\d+$/.test(value)) {
@@ -240,12 +240,12 @@ const UpdateProgramaFormativo = ({ programaFormativo, others }) => {
          }
       }
 
-      if (name === "nombrePF") {
-         const nombres = await get("programas-formativos");
-         if (nombres.some((nom) => nom.nombrePF === value)) {
-            newErrors[name] = "El nombre ya existe ";
-         }
-      }
+      // if (name === "nombrePF") {
+      //    const nombres = await get("programas-formativos");
+      //    if (nombres.some((nom) => nom.nombrePF === value)) {
+      //       newErrors[name] = "El nombre ya existe ";
+      //    }
+      // }
 
       if (name === "trimestres") {
          if (!/^\d+$/.test(value)) {
@@ -399,6 +399,7 @@ const ConsultarPF = ({ programa ,pf }) => {
   const headers  =[
    {title : "Código", prop : "codigoCompetencia"},
    {title : "Nombre Competencia", prop : "nombreCompetencia"},
+   {title: "Nombre de NCSL", prop: "nombreNCSL"},
    {title : "Resultado de Aprendizaje", prop : "actions", cell: (row) => (
       <div>
          { 

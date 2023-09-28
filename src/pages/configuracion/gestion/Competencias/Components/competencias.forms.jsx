@@ -43,12 +43,12 @@ const CreateCompetencia = ({ claves, others }) => {
          }
       }
 
-      if (name === "nombreCompetencia") {
-         const nombres = await get("competencias");
-         if (nombres.some(nom => nom.nombreCompetencia === value)) {
-            newErrors[name] = "El nombre ya existe ";
-         }
-      }
+      // if (name === "nombreCompetencia") {
+      //    const nombres = await get("competencias");
+      //    if (nombres.some(nom => nom.nombreCompetencia === value)) {
+      //       newErrors[name] = "El nombre ya existe ";
+      //    }
+      // }
 
       setErrors(newErrors);
    };
@@ -119,6 +119,21 @@ const CreateCompetencia = ({ claves, others }) => {
                   required
                />
                {errors.nombreCompetencia && <span className="invalid-feedback">{errors.nombreCompetencia}</span>}
+            </div>
+            <div className="form-group">
+               <label htmlFor="nombreNCSL">
+                  Nombre de NCSL: <span style={{ color: "red" }}>*</span>
+               </label>
+               <input
+                  value={formData.nombreNCSL}
+                  onChange={handleChange}
+                  name="nombreNCSL"
+                  type="text"
+                  className={`form-control ${errors.nombreNCSL ? "is-invalid" : ""}`}
+                  id="nombreNCSL"
+                  required
+               />
+               {errors.nombreNCSL && <span className="invalid-feedback">{errors.nombreNCSL}</span>}
             </div>
             <div className="form-group">
                <label htmlFor="programasCompetencia">Programa formativo: <span style={{ color: "red" }}>*</span></label>
