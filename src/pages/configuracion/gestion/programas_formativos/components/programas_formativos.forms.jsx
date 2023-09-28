@@ -399,7 +399,7 @@ const ConsultarPF = ({ programa ,pf }) => {
   const headers  =[
    {title : "Código", prop : "codigoCompetencia"},
    {title : "Nombre Competencia", prop : "nombreCompetencia"},
-   {title: "Nombre de NCSL", prop: "nombreNCSL"},
+   {title: "Nombre de NSCL", prop: "nombreNSCL"},
    {title : "Resultado de Aprendizaje", prop : "actions", cell: (row) => (
       <div>
          { 

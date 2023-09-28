@@ -9,7 +9,7 @@ const Competencias = () => {
    const headers = [
       { title: "Código", prop: "codigoCompetencia" },
       { title: "Nombre Competencia", prop: "nombreCompetencia" },
-      { title: "Nombre de NCSL", prop: "nombreNCSL"},
+      { title: "Nombre de NSCL", prop: "nombreNSCL"},
       { title: "Programa Formativo", prop: "programasCompetencia.nombrePF" },
       {
          title: 'Acciones',

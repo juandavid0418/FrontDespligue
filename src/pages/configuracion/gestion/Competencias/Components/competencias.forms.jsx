@@ -7,6 +7,7 @@ import DataTable from "../../../../../components/Datatable/Datatable";
 const CreateCompetencia = ({ claves, others }) => {
    const [formData, setFormData] = useState({
       nombreCompetencia: "",
+      nombreNSCL: "",
       codigoCompetencia: "",
       programasCompetencia: ""
    });
@@ -14,6 +15,7 @@ const CreateCompetencia = ({ claves, others }) => {
    const [errors, setErrors] = useState({
       nombreCompetencia: false,
       codigoCompetencia: false,
+      nombreNSCL: false,
       programasCompetencia: false
    });
 
@@ -83,6 +85,7 @@ const CreateCompetencia = ({ claves, others }) => {
       setFormData({
          nombreCompetencia: "",
          codigoCompetencia: "",
+         nombreNSCL:"",
          programasCompetencia: ""
       })
    }
@@ -121,19 +124,19 @@ const CreateCompetencia = ({ claves, others }) => {
                {errors.nombreCompetencia && <span className="invalid-feedback">{errors.nombreCompetencia}</span>}
             </div>
             <div className="form-group">
-               <label htmlFor="nombreNCSL">
+               <label htmlFor="nombreNSCL">
                   Nombre de NCSL: <span style={{ color: "red" }}>*</span>
                </label>
                <input
-                  value={formData.nombreNCSL}
+                  value={formData.nombreNSCL}
                   onChange={handleChange}
-                  name="nombreNCSL"
+                  name="nombreNSCL"
                   type="text"
-                  className={`form-control ${errors.nombreNCSL ? "is-invalid" : ""}`}
-                  id="nombreNCSL"
+                  className={`form-control ${errors.nombreNSCL ? "is-invalid" : ""}`}
+                  id="nombreNSCL"
                   required
                />
-               {errors.nombreNCSL && <span className="invalid-feedback">{errors.nombreNCSL}</span>}
+               {errors.nombreNSCL && <span className="invalid-feedback">{errors.nombreNSCL}</span>}
             </div>
             <div className="form-group">
                <label htmlFor="programasCompetencia">Programa formativo: <span style={{ color: "red" }}>*</span></label>
@@ -171,6 +174,7 @@ const CreateCompetencia = ({ claves, others }) => {
 const UpdateCompetencia = ({ competencia, claves, others }) => {
    const [formData, setFormData] = useState({
       codigoCompetencia: competencia.codigoCompetencia,
+      nombreNSCL: competencia.nombreNSCL,
       nombreCompetencia: competencia.nombreCompetencia,
       programasCompetencia: competencia.programasCompetencia.idProgramaFormativo
    });
@@ -178,6 +182,7 @@ const UpdateCompetencia = ({ competencia, claves, others }) => {
    const [errors, setErrors] = useState({
       codigoCompetencia: false,
       nombreCompetencia: false,
+      nombreNSCL: false,
       programasCompetencia: false
    });
 
@@ -233,6 +238,7 @@ const UpdateCompetencia = ({ competencia, claves, others }) => {
       setFormData({
          codigoCompetencia: competencia.codigoCompetencia,
          nombreCompetencia: competencia.nombreCompetencia,
+         nombreNSCL: competencia.nombreNSCL,
          programasCompetencia: competencia.programasCompetencia.idProgramaFormativo
       })
    };
@@ -265,6 +271,19 @@ const UpdateCompetencia = ({ competencia, claves, others }) => {
                   required
                />
                {errors.nombreCompetencia && <span className="invalid-feedback">{errors.nombreCompetencia}</span>}
+            </div>
+            <div className="form-group">
+               <label htmlFor="nombreNSCL">Nombre de NSCL: </label>
+               <input
+                  value={formData.nombreNSCL}
+                  onChange={handleChange}
+                  name="nombreNSCL"
+                  type="text"
+                  className={`form-control ${errors.nombreNSCL ? "is-invalid" : ""}`}
+                  id="nombreNSCL"
+                  required
+               />
+               {errors.nombreNSCL && <span className="invalid-feedback">{errors.nombreNSCL}</span>}
             </div>
             <div className="form-group">
                <label htmlFor="programasCompetencia">Programa Formativo: </label>
@@ -349,6 +368,14 @@ const ConsultarCompetencia = ({ competencia, compeR }) => {
                   <div className="form-group">
                      <label htmlFor="nombreCompetencia">Nombre Competencia:</label>
                      <p className="font-bold">{competencia.nombreCompetencia}</p>
+                  </div>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col-md-10">
+                  <div className="form-group">
+                     <label htmlFor="nombreNSCL">Nombre de NSCL:</label>
+                     <p className="font-bold">{competencia.nombreNSCL}</p>
                   </div>
                </div>
             </div>
