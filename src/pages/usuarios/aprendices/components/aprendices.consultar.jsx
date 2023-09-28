@@ -42,13 +42,13 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Documento del Aprendiz</h5>
-                <p class="card-text">{aprendizData.documento}</p>
+                <p class="card-text">{aprendizData.documento} / {aprendizData.tipoDocumentoAprendiz.nombreTipoDocumento}</p>
               </div>
             </li>
 
             <li class="list-group-item">
               <div class="card-body row">
-                <h5 class="card-title col-3 text-muted">Correo electrónico</h5>
+                <h5 class="card-title col-3 text-muted">Correo Electrónico</h5>
                 <p class="card-text">{aprendizData.email}</p>
               </div>
             </li>
@@ -56,8 +56,15 @@ const ConsultarAprendiz = () =>{
 
             <li class="list-group-item">
               <div class="card-body row">
-                <h5 class="card-title col-3 text-muted">Número celular</h5>
+                <h5 class="card-title col-3 text-muted">Número Celular</h5>
                 <p class="card-text">{aprendizData.telefono}</p>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="card-body row">
+                <h5 class="card-title col-3 text-muted">Ficha</h5>
+                <p class="card-text">{aprendizData.fichaAprendiz}</p>
               </div>
             </li>
           </ul>
