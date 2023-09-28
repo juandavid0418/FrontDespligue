@@ -159,10 +159,10 @@ const ConsultarAprendiz = () =>{
               </div>
             </li>
 
-            <li class="list-group-item">
+            {/* <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Observaciones del Aprendiz</h5>
-                {/* <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> */}
+                {/* <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> 
                 <DataTable
 
               headers={headers1}
@@ -178,7 +178,7 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Queja</h5>
-                {/* <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> */}
+                <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> 
                 <DataTable
 
               headers={headers2}
@@ -193,7 +193,7 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Plan de Mejoramiento</h5>
-                {/* <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> */}
+                 <p class="card-text">{aprendizData.grupoAprendiz.nombreProyecto}</p> 
                 <DataTable
 
               headers={headers3}
@@ -203,7 +203,7 @@ const ConsultarAprendiz = () =>{
 
             />
               </div>
-            </li>
+            </li> */}
             
           </ul>
         </div>
