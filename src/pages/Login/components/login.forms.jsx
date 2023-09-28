@@ -9,8 +9,7 @@ const LoginForm = () => {
       documento: "",
       password: "",
       forgotPassword: "",
-      newPassword: "",
-      confirmPassword: ""
+      newPassword: ""
    });
 
 
@@ -43,7 +42,7 @@ const LoginForm = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      if ((!showRecoveryInputs ? formData.documento : formData.forgotPassword) === "" || (!showRecoveryInputs ? formData.password : formData.newPassword && formData.confirmPassword) === "") {
+      if ((!showRecoveryInputs ? formData.documento : formData.forgotPassword) === "" || (!showRecoveryInputs ? formData.password : formData.newPassword) === "") {
          const errorChanges = { ...validations };
          if ((!showRecoveryInputs ? formData.documento : formData.forgotPassword) === "") {
             errorChanges.vDocumento.msg = "El DOCUMENTO no debe ir vacío";
@@ -52,7 +51,7 @@ const LoginForm = () => {
             errorChanges.vDocumento.msg = "";
             errorChanges.vDocumento.valid = 1;
          }
-         if ((!showRecoveryInputs ? formData.password : formData.newPassword && formData.confirmPassword) === "") {
+         if ((!showRecoveryInputs ? formData.password : formData.newPassword) === "") {
             errorChanges.vPassword.msg = "La CONTRASEÑA no debe ir vacía";
             errorChanges.vPassword.valid = 2;
          } else {
@@ -80,7 +79,7 @@ const LoginForm = () => {
                            password: "",
                         });
                      }
-                     if (auth.label === (!showRecoveryInputs ? "password" : "newPassword" && "confirmPassword")) {
+                     if (auth.label === (!showRecoveryInputs ? "password" : "newPassword")) {
                         errorChanges.vDocumento.msg = "";
                         errorChanges.vDocumento.valid = 1;
                         errorChanges.vPassword.msg = `${auth.error}`;
@@ -218,7 +217,7 @@ const LoginForm = () => {
             errorChanges.vDocumento.valid = 1;
          }
       }
-      if (name === (!showRecoveryInputs ? "password" : "newPassword" && "confirmPassword")) {
+      if (name === (!showRecoveryInputs ? "password" : "newPassword")) {
          if (value === "") {
             errorChanges.vPassword.msg = "La Contraseña no debe ir vacía";
             errorChanges.vPassword.valid = 2;
@@ -313,24 +312,6 @@ const LoginForm = () => {
                         onChange={handleChange}
                         onBlur={(e) => afterFocus(e.target.name, e.target.value)}
                         placeholder="Nueva Contraseña:"
-                        className={`form-control ${validated.vPassword.valid === 2 && "is-invalid"
-                           } ${validated.vPassword.valid === 1 && "is-valid"}`}
-                     />
-                     {validated.vPassword.msg !== "" && (
-                        <span className="text-xs text-red-600">
-                           {validated.vPassword.msg}
-                        </span>
-                     )}
-                  </div>
-                  <div className="form-group">
-                     <input
-                        type="password"
-                        value={formData.confirmPassword}
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        onChange={handleChange}
-                        onBlur={(e) => afterFocus(e.target.name, e.target.value)}
-                        placeholder="Confirmar Contraseña:"
                         className={`form-control ${validated.vPassword.valid === 2 && "is-invalid"
                            } ${validated.vPassword.valid === 1 && "is-valid"}`}
                      />
