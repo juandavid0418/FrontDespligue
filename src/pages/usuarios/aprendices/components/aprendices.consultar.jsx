@@ -1,6 +1,6 @@
 import { useParams, useLocation } from 'react-router-dom';
 import React, { useState, useEffect, Fragment } from 'react'
-import { get} from "../../../../config/Api";
+import { get } from '../../../../config/Api/api';
 import DataTable from "../../../../components/Datatable/Datatable";
 
 
