@@ -167,11 +167,6 @@ const ConsultarAprendiz = () =>{
 
               headers={headers1}
               body = {observaciones }
-              customBodyRender={(rowData) => (
-                <span>
-                  {rowData.ObservacionAprendiz ? rowData.ObservacionAprendiz : 'No disponible'}
-                </span>
-              )}
               configTable={configTable}
 
 
@@ -188,11 +183,6 @@ const ConsultarAprendiz = () =>{
 
               headers={headers2}
               body = {quejas}
-              customBodyRender={(rowData) => (
-                <span>
-                  {rowData.QuejasAprendiz ? rowData.QuejasAprendiz : 'No disponible'}
-                </span>
-              )}
               configTable={configTable}
 
 
@@ -207,12 +197,7 @@ const ConsultarAprendiz = () =>{
                 <DataTable
 
               headers={headers3}
-              body = {planM}
-              customBodyRender={(rowData) => (
-                <span>
-                  {rowData.PlanmA ? rowData.PlanmA : 'No disponible'}
-                </span>
-              )}
+              body = {planM ? planM: 'No disponible'}
               configTable={configTable}
 
 
