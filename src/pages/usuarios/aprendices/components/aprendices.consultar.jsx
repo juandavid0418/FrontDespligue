@@ -64,7 +64,7 @@ const ConsultarAprendiz = () =>{
             <li class="list-group-item">
               <div class="card-body row">
                 <h5 class="card-title col-3 text-muted">Ficha</h5>
-                <p class="card-text">{aprendizData.fichaAprendiz}</p>
+                <p class="card-text">{aprendizData.fichaAprendiz.codigoFicha}</p>
               </div>
             </li>
           </ul>
